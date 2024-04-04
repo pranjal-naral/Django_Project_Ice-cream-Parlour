@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+
+<div class="row">
+    <div class="col-md-8 mt-4 mx-auto">
+        <div class="row">
+            {% for x in products %}
+            <div class="col-md-6">
+                <img src="{{x.pimage.url}}" class="card-img-top" width="200" alt="..." height="200">
+            </div>
+
+            <div class="col-md-6">
+              <p><strong> Product Name :</strong>&nbsp;{{x.name}}</p>
+              <p><strong>price:</strong>&nbsp;{{x.price}}</p>
+              {% if x.cat == 1 %}
+              <p><strong>category :</strong>&nbsp;chololates</p>
+              {% elif x.pid.cat == 2 %}
+              <p><strong>category :</strong>&nbsp;fruits</p>
+              {% else %}
+              <p><strong>category :</strong>&nbsp;other</p>
+              {% endif %}
+              
+              
+              <p><strong> Product Details :</strong>&nbsp;{{x.pdetails}}</p>
+              <br>
+              <a href="/addtocart/{{x.id}}"><button class="btn btn-danger">Add to cart</button></a>
+              <a href="/cart"><button class="btn btn-danger">View Cart </button></a>
+              <a href="/home"><button class="btn btn-danger">Shop More</button></a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>      
+
+{% endblock 'main' %}

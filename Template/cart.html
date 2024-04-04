@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+
+
+ <!-- customer details -->
+ <div class="container">   
+
+ <div class="row">
+    <div class="col-md-9 p-2">
+        <h5 class="bg-dark-subtle p-2"> customer details </h5>
+        {% for x in products %}
+        {% if forloop.counter == 1 %}
+        <p><strong>Name :</strong>&nbsp;{{x.uid.first_name}}</p>
+        <p><strong>Mobile No:</strong>&nbsp;7264865824</p>
+        <p><strong>Email :</strong>&nbsp;{{x.uid.email}}</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+
+    <div class="col-md-3 p-2">
+        <h5 class="bg-dark-subtle p-2"> Total Amount </h5>
+        <p><strong>Total({{n}} items) :</strong>&nbsp;Rs.{{total}}</p>
+        <p><strong>Total amount:</strong>&nbsp;Rs.{{total}}</p>
+        <a href="/placeorder"><button class="btn btn-danger">Place Order</button></a>
+    </div>
+</div>
+
+
+<!-- cart details -->
+    <h5 class="bg-dark-subtle p-2"> Cart Details </h5>
+    <div class="row">
+        {% for x in products %}
+        <div class="col-md-4">
+            <img src="{{x.pid.pimage.url}}" class="card-img-top" width="100" alt="..." height="200">
+
+        </div>
+
+
+        <div class="col-md-8">
+            <p><strong> Product Name :</strong>&nbsp;{{x.pid.name}}</p>
+            <p><strong>price:</strong>&nbsp;{{x.pid.price}}</p>
+            {% if x.pid.cat == 1 %}
+            <p><strong>category :</strong>&nbsp;chocolates</p>
+            {% elif x.pid.cat == 2 %}
+            <p><strong>category :</strong>&nbsp;fruits</p>
+            {% else %}
+            <p><strong>category :</strong>&nbsp;other</p>
+           
+            {% endif %}
+            
+
+            <p><strong> Product Details :</strong>&nbsp;{{x.pid.pdetails}}</p>
+
+            <p>
+                <strong>QTY:</strong>
+                <a href="/updateqty/0/{{x.id}}"><button class="btn btn-danger">-</button></a>
+                <input type="number" value="{{x.qty}}">
+                <a href="/updateqty/1/{{x.id}}"><button class="btn btn-success">+</button></a>
+              
+            </p>
+
+            <a href="/remove/{{x.id}}"><button class="btn btn-danger">Remove</button></a>
+        </div>
+        {% endfor %}
+        <hr>
+
+
+       
+        <hr>
+    </div>
+</div>
+
+    {% endblock 'main' %}
